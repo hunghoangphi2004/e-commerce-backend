@@ -1,0 +1,26 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+}
+
+model Product{
+  product_id    Int     @id @default(autoincrement()) 
+  title String @db.NVarChar(255) @unique
+  quantity Int @default(0)
+  description  String @db.NVarChar(Max)
+  list_price Decimal @db.Decimal(18,2)
+  sale_price Decimal @db.Decimal(18,2)
+  is_active Boolean @default(true)
+  is_deleted Boolean @default(false)
+  created_at DateTime @default(now())
+  updated_at DateTime?
+  deleted_at DateTime?
+}
